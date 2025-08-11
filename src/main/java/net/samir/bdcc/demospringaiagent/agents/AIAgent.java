@@ -1,6 +1,7 @@
 package net.samir.bdcc.demospringaiagent.agents;
 
 
+import net.samir.bdcc.demospringaiagent.tools.AgentTools;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
@@ -14,10 +15,11 @@ import java.util.logging.Logger;
 public class AIAgent {
     private ChatClient chatClient;
 
-    public AIAgent(ChatClient.Builder chatClient , ChatMemory chatMemory) {
+    public AIAgent(ChatClient.Builder chatClient , ChatMemory chatMemory, AgentTools agentTools) {
         this.chatClient = chatClient
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
                 .defaultAdvisors(new SimpleLoggerAdvisor())
+                .defaultTools(agentTools)
                 .build();
     }
   public Flux<String> onQuery(String query) {
