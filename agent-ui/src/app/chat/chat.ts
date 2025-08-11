@@ -17,7 +17,7 @@ export class ChatComponent {
 
 constructor(private https: HttpClient) {}
   askAgent() {
-this.https.get(`http://localhost:8080/askAgent?query=${this.query}`)
+this.https.get(`http://localhost:8080/askAgent?query=${this.query}`,{responseType:"text"})
     .subscribe({next : value =>{
       this.response = value;
       },
