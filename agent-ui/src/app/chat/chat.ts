@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpDownloadProgressEvent, HttpEventType} from '@angular/common/http';
 import {MarkdownModule} from 'ngx-markdown';
 
 @Component({
@@ -14,16 +14,23 @@ import {MarkdownModule} from 'ngx-markdown';
 export class ChatComponent {
   query: string = "";
   response: any;
-  loading: any ;
+  loading: boolean = false ;
 
 constructor(private https: HttpClient) {}
   askAgent() {
-this.https.get(`http://localhost:8080/askAgent?query=${this.query}`,{responseType:"text"})
-    .subscribe({next : value =>{
-      this.response = value;
+  this.loading = true;
+this.https.get(`http://localhost:8080/askAgent?query=${this.query}`,{responseType:"text" ,observe:"events", reportProgress:true})
+    .subscribe({next : evt =>{
+     if (evt.type === HttpEventType.DownloadProgress ) {
+       this.response = (evt as HttpDownloadProgressEvent).partialText;
+     }
+     },
+  error: error => console.log(error)
+    ,
+      complete : () => {
+        this.loading = false;
       },
-  error: error => console.log(error)})
+  })
   }
-
   }
 

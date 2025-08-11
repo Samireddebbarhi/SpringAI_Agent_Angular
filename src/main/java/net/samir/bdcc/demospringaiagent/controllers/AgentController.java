@@ -19,11 +19,10 @@ public class AgentController {
         this.chatClient = chatClient.build();
     }
     @GetMapping(value="/askAgent",produces = MediaType.TEXT_PLAIN_VALUE)
-    public String askAgent(@RequestParam(defaultValue = "Hello") String query) {
+    public Flux<String> askAgent(@RequestParam(defaultValue = "Hello") String query) {
         return chatClient.prompt()
                 .user(query)
-                .call()
+                .stream()
                 .content();
     }
-
 }
