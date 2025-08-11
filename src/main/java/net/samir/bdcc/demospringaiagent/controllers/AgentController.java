@@ -1,5 +1,6 @@
 package net.samir.bdcc.demospringaiagent.controllers;
 
+import net.samir.bdcc.demospringaiagent.agents.AIAgent;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,17 +13,15 @@ import reactor.core.publisher.Flux;
 @RestController
 @CrossOrigin("*")
 public class AgentController {
-    private ChatClient chatClient;
+    private AIAgent agent;
 
 
-    public AgentController(ChatClient.Builder chatClient) {
-        this.chatClient = chatClient.build();
+    public AgentController(AIAgent agent) {
+        this.agent = agent;
     }
-    @GetMapping(value="/askAgent",produces = MediaType.TEXT_PLAIN_VALUE)
+
+    @GetMapping(value = "/askAgent", produces = MediaType.TEXT_PLAIN_VALUE)
     public Flux<String> askAgent(@RequestParam(defaultValue = "Hello") String query) {
-        return chatClient.prompt()
-                .user(query)
-                .stream()
-                .content();
+        return agent.onQuery(query);
     }
 }
