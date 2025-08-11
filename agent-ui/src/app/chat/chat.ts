@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import {RouterOutlet} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
+import {MarkdownModule} from 'ngx-markdown';
 
 @Component({
   selector: 'app-chat',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,MarkdownModule],
   templateUrl: './chat.html',
   styleUrl: './chat.css',
   standalone:true
@@ -14,6 +14,7 @@ import {HttpClient} from '@angular/common/http';
 export class ChatComponent {
   query: string = "";
   response: any;
+  loading: any ;
 
 constructor(private https: HttpClient) {}
   askAgent() {

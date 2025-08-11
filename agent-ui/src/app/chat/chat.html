@@ -1,12 +1,24 @@
 <div class="p-3">
-  <div class="card-body" >
-    <label style ="display : block " class="form-label">Ask yur Question:</label>
-    <input [(ngModel)]="query" style="width:70%; display:inline" class="form-control" type="text">
-    <button (click)="askAgent()" style ="display:inline " class="btn btn-outline-primary">Send</button>
-  </div>
+
   <div class="card-body">
+    <label class="form-label d-block mb-2">Ask your question:</label>
+
+    <input  [(ngModel)]="query"
+            class="form-control d-inline-block"
+            style="width:70%"
+            type="text"
+            placeholder="Type here…">
+
+    <button (click)="askAgent()"
+            class="btn btn-outline-primary ms-2"
+            [disabled]="loading || !query.trim()">
+      Send
+    </button>
+  </div>
+
+  <div class="card-body" >
     @if (response){
-      {{response}}
-    }
-</div>
+    <markdown [data]="response"></markdown>}
+  </div>
+
 </div>
