@@ -56,8 +56,6 @@ graph TD
     D --> E[Save vectors to vector_store.json];
 ```
 
-### Querying Flow (Runtime)
-This is the live flow when a user interacts with the application.
 
 ```mermaid
 graph TD
