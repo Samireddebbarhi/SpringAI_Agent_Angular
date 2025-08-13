@@ -20,9 +20,9 @@ import java.util.List;
 
 @Component
 public class DocumentIndexor {
-    @Value("classpath:/pdfs/Demander.pdf")
+    @Value("classpath:/pdfs/certificate-full-stack-js-mern.pdf")
     private Resource pdfResource;
-    @Value("vector_store.json}")
+    @Value("vector_store.json")
     private String fileStore;
 
     @Bean
@@ -42,8 +42,6 @@ public class DocumentIndexor {
         } else {
             vectorStore.load(file);
         }
-
         return vectorStore;
-
     }
 }
