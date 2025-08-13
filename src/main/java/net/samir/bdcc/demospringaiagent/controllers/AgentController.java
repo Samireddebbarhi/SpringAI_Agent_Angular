@@ -1,22 +1,24 @@
 package net.samir.bdcc.demospringaiagent.controllers;
 
 import net.samir.bdcc.demospringaiagent.agents.AIAgent;
+import net.samir.bdcc.demospringaiagent.rag.DocumentIndexor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Flux;
+
+import java.io.IOException;
 
 
 @RestController
 @CrossOrigin("*")
 public class AgentController {
+
     private AIAgent agent;
 
 
-    public AgentController(AIAgent agent) {
+    public AgentController(AIAgent agent ) {
         this.agent = agent;
     }
 
@@ -24,4 +26,5 @@ public class AgentController {
     public Flux<String> askAgent(@RequestParam(defaultValue = "Hello") String query) {
         return agent.onQuery(query);
     }
+
 }
