@@ -55,25 +55,33 @@ graph TD
     C --> D[Generate Embeddings for each chunk];
     D --> E[Save vectors to vector_store.json];
 ```
-
+### Querying Flow (Runtime)
+This is the live flow when a user interacts with the application.
 
 ```mermaid
 graph TD
-    subgraph Frontend (Angular)
-        A[User Interface] -- HTTP GET Request --> B;
+    subgraph "Frontend (Angular)"
+        A[User Interface]
     end
 
     subgraph "Backend (Spring Boot)"
-        B(AgentController @ /askAgent) --> C{AIAgent Service};
-        C -- "1. User Query" --> D{Vector Store};
-        D -- "2. Find similar chunks (Context)" --> C;
-        C -- "3. Build Augmented Prompt (Context + Query)" --> E(LLM via Spring AI);
-        E -- "4. Generate Answer" --> C;
-        C -- "5. Stream Response" --> B;
+        B(AgentController @ /askAgent)
+        C{AIAgent Service}
+        D{Vector Store}
+        E(LLM via Spring AI)
     end
 
-    B -- SSE (Server-Sent Events) --> A;
+    %% --- Define Connections ---
+    A -- "HTTP GET Request" --> B
+    B -- "Streams Response (SSE)" --> A
+    
+    B --> C
+    C -- "1. User Query" --> D
+    D -- "2. Find similar chunks (Context)" --> C
+    C -- "3. Build Augmented Prompt" --> E
+    E -- "4. Generate Answer" --> C
 ```
+
 
 ## Project Structure
 Here's a breakdown of the key files and directories in the Spring Boot backend:
