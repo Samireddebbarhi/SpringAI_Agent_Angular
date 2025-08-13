@@ -167,3 +167,18 @@ The backend exposes a single primary endpoint for querying the agent.
 ```bash
 curl "http://localhost:8080/askAgent?query=What is the main topic of the document?"
 ```
+
+#### Examples Execution
+
+<img width="1917" height="980" alt="Screenshot 2025-08-13 RAG" src="https://github.com/user-attachments/assets/efbee135-1354-40ad-bbc6-341d776f2dba" />
+
+<img width="1910" height="970" alt="Screenshot 2025-08-11 AgenticAIPart3" src="https://github.com/user-attachments/assets/10f558f3-e8b2-4597-937b-34552d25fcf0" />
+
+<img width="1918" height="821" alt="Screenshot 2025-08-11 Tools" src="https://github.com/user-attachments/assets/4ee1c41a-f2d4-441e-9dee-16ff62eb68ee" />
+
+<img width="1243" height="873" alt="Screenshot 2025-08-12 HelloWorld" src="https://github.com/user-attachments/assets/30bf2c50-45f5-4403-87b5-be985cb5e492" />
+
+
+
+
+
